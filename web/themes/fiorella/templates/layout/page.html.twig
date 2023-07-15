@@ -1,19 +1,24 @@
 <div class="layout-container">
 
   <header role="banner">
-    {{ page.header }}
+    <div class="container">
+      <div class="flex">
+        {{ page.header }}
+        {{ page.primary_menu }}
+        {{ page.secondary_menu }}
+      </div>
+    </div>
   </header>
 
-  {{ page.primary_menu }}
-  {{ page.secondary_menu }}
+  <div class="container">
+    {{ page.breadcrumb }}
 
-  {{ page.breadcrumb }}
+    {{ page.highlighted }}
 
-  {{ page.highlighted }}
+    {{ page.help }}
+  </div>
 
-  {{ page.help }}
-
-  <main role="main">
+  <main role="main" class="container">
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
     <div class="layout-content">
