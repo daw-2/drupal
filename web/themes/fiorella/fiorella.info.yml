@@ -1,0 +1,9 @@
+name: Fiorella
+type: theme
+core_version_requirement: '>=10'
+base theme: false
+description: Un thème Drupal.
+#regions:
+#  header: 'Header'
+#  content: 'Content'
+#  footer: 'Footer'
