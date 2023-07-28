@@ -1,6 +1,7 @@
 /vendor
 
 /web/core
+/web/modules/contrib
 /web/modules/README.txt
 /web/profiles/README.txt
 /web/sites
