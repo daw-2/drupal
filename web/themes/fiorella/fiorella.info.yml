@@ -1,8 +1,8 @@
 name: Fiorella
 type: theme
+description: 'Un thème Drupal.'
 core_version_requirement: '>=10'
 base theme: false
-description: 'Un thème Drupal.'
 libraries:
   - fiorella/global
 #regions:
