@@ -7,3 +7,7 @@ function fiorella_page_attachments_alter(array &$attachments) {
         }
     }
 }
+
+function fiorella_preprocess_html(array &$variables) {
+    $variables['attributes']['class'] = 'fiorella';
+}
