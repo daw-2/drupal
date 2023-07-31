@@ -11,3 +11,11 @@ function fiorella_page_attachments_alter(array &$attachments) {
 function fiorella_preprocess_html(array &$variables) {
     $variables['attributes']['class'] = 'fiorella';
 }
+
+function fiorella_preprocess_block(array &$variables) {
+    $id = $variables['attributes']['id'];
+
+    if ($id === 'block-fiorella-powered') {
+        $variables['attributes']['class'] = 'container';
+    }
+}

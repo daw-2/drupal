@@ -1,0 +1,4 @@
+global:
+  css:
+    component:
+      css/footer.css: {}

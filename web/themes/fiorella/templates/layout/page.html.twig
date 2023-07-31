@@ -1,21 +1,19 @@
 <div class="layout-container">
+
   <header role="banner">
-    <div class="container">
-      <div class="flex">
-        {{ page.header }}
-        {{ page.primary_menu }}
-        {{ page.secondary_menu }}
-      </div>
-    </div>
+    {{ page.header }}
   </header>
 
-  <div class="container">
-    {{ page.breadcrumb }}
-    {{ page.highlighted }}
-    {{ page.help }}
-  </div>
+  {{ page.primary_menu }}
+  {{ page.secondary_menu }}
 
-  <main role="main" class="container">
+  {{ page.breadcrumb }}
+
+  {{ page.highlighted }}
+
+  {{ page.help }}
+
+  <main role="main">
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
     <div class="layout-content">
@@ -33,11 +31,13 @@
         {{ page.sidebar_second }}
       </aside>
     {% endif %}
+
   </main>
 
   {% if page.footer %}
-    <footer role="contentinfo" class="container">
+    <footer role="contentinfo">
       {{ page.footer }}
     </footer>
   {% endif %}
+
 </div>{# /.layout-container #}

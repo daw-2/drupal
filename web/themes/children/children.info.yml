@@ -1,0 +1,17 @@
+name: Children
+type: theme
+description: 'Un sous thème Drupal.'
+core_version_requirement: '>=10'
+base theme: olivero
+
+# En ajout
+# libraries-extend:
+#   olivero/global-styling:
+#     - children/global
+
+# En surcharge
+libraries-override:
+  olivero/global-styling:
+    css:
+      component:
+        css/components/footer.css: css/footer.css
