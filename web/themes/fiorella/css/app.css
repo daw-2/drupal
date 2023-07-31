@@ -1,22 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     background-color: lightgray;
-}
-
-.container {
-    max-width: 1000px;
-    margin: auto;
-}
-
-.flex {
-    display: flex;
-}
-
-header .flex {
-    justify-content: space-between;
 }
