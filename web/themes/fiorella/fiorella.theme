@@ -19,3 +19,9 @@ function fiorella_preprocess_block(array &$variables) {
         $variables['attributes']['class'] = 'container';
     }
 }
+
+function fiorella_preprocess_page(array &$variables) {
+  if ($variables['is_front']) {
+    $variables['#attached']['library'][] = 'fiorella/global';
+  }
+}
