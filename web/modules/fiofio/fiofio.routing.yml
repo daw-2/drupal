@@ -1,6 +1,7 @@
 fiofio.say:
   path: /fiofio/say/{count}
   defaults:
+    # _controller: fiofio.controller:index
     _controller: '\Drupal\fiofio\Controller\SayController::index'
   requirements:
     _permission: 'access content'
