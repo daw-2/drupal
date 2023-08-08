@@ -1,0 +1,4 @@
+name: Fiofio
+type: module
+description: 'Un module Drupal.'
+core_version_requirement: '>=10'

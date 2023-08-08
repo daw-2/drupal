@@ -1,0 +1,6 @@
+fiofio.say:
+  path: /fiofio/say
+  defaults:
+    _controller: '\Drupal\fiofio\Controller\SayController::index'
+  requirements:
+    _permission: 'access content'
