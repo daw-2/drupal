@@ -1,6 +1,7 @@
 services:
   fiofio.generator:
     class: Drupal\fiofio\FioGenerator
+    autowire: true
   Drupal\fiofio\FioGenerator: '@fiofio.generator'
   fiofio.controller:
     class: Drupal\fiofio\Controller\SaysController
