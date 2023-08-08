@@ -17,6 +17,12 @@ function fiorella_preprocess_block(array &$variables) {
 
   if ($id === 'block-fiorella-powered') {
     $variables['attributes']['class'] = 'container';
+    $config = \Drupal::config('system.site');
+    $variables['site_name'] = $config->get('name');
+  }
+
+  if ($id === 'block-fiorella-views-block-who-s-online-who-s-online-block') {
+    $variables['attributes']['class'] = 'col';
   }
 }
 
@@ -47,4 +53,12 @@ function fiorella_preprocess_menu(array &$variables, $hook) {
       $item['is_active'] = $item['url']->toString() === $current_path;
     }
   }
+}
+
+function fiorella_preprocess_node(array &$variables) {
+  // dump(time());
+  $variables['content']['custom_thing'] = [
+    '#markup' => '<p>Un exemple simple</p>',
+  ];
+  // dump($variables);
 }
