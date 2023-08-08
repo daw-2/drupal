@@ -9,20 +9,20 @@ function fiorella_page_attachments_alter(array &$attachments) {
 }
 
 function fiorella_preprocess_html(array &$variables) {
-  $variables['attributes']['class'] = 'fiorella';
+  $variables['attributes']['class'][] = 'fiorella';
 }
 
 function fiorella_preprocess_block(array &$variables) {
   $id = $variables['attributes']['id'];
 
   if ($id === 'block-fiorella-powered') {
-    $variables['attributes']['class'] = 'container';
+    $variables['attributes']['class'][] = 'container';
     $config = \Drupal::config('system.site');
     $variables['site_name'] = $config->get('name');
   }
 
   if ($id === 'block-fiorella-views-block-who-s-online-who-s-online-block') {
-    $variables['attributes']['class'] = 'col';
+    $variables['attributes']['class'][] = 'col';
   }
 }
 

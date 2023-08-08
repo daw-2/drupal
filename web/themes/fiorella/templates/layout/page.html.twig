@@ -11,32 +11,36 @@
   </div>
 </nav>
 
-<div class="layout-container">
+<div class="container">
   {{ page.breadcrumb }}
   {{ page.highlighted }}
   {{ page.help }}
 
-  <main role="main">
+  <main>
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-    <div class="layout-content">
-      {{ page.content }}
-    </div>{# /.layout-content #}
+    <div class="row">
+      <div class="col-lg-9">
+        {{ page.content }}
+      </div>
 
-    {% if page.sidebar_first %}
-      <aside class="layout-sidebar-first" role="complementary">
-        {{ page.sidebar_first }}
-      </aside>
-    {% endif %}
+      <div class="col-lg-3">
+        {% if page.sidebar_first %}
+          <aside>
+            {{ page.sidebar_first }}
+          </aside>
+        {% endif %}
 
-    {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
-    {% endif %}
+        {% if page.sidebar_second %}
+          <aside>
+            {{ page.sidebar_second }}
+          </aside>
+        {% endif %}
+      </div>
+    </div>
 
   </main>
-</div>{# /.layout-container #}
+</div>
 
 {% if page.footer %}
 <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
