@@ -1,27 +1,41 @@
 <?php
 
 function fiorella_page_attachments_alter(array &$attachments) {
-    foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
-        if ($attachment[1] == 'system_meta_generator') {
-            unset($attachments['#attached']['html_head'][$key]);
-        }
+  foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
+    if ($attachment[1] == 'system_meta_generator') {
+      unset($attachments['#attached']['html_head'][$key]);
     }
+  }
 }
 
 function fiorella_preprocess_html(array &$variables) {
-    $variables['attributes']['class'] = 'fiorella';
+  $variables['attributes']['class'] = 'fiorella';
 }
 
 function fiorella_preprocess_block(array &$variables) {
-    $id = $variables['attributes']['id'];
+  $id = $variables['attributes']['id'];
 
-    if ($id === 'block-fiorella-powered') {
-        $variables['attributes']['class'] = 'container';
-    }
+  if ($id === 'block-fiorella-powered') {
+    $variables['attributes']['class'] = 'container';
+  }
 }
 
 function fiorella_preprocess_page(array &$variables) {
   if ($variables['is_front']) {
     $variables['#attached']['library'][] = 'fiorella/global';
+  }
+}
+
+function fiorella_preprocess_form(array &$variables) {
+  $id = $variables['element']['#form_id'];
+
+  if ($id === 'search_block_form') {
+    $variables['attributes']['class'][] = 'd-flex gap-2';
+  }
+}
+
+function fiorella_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id === 'search_block_form') {
+    $form['actions']['submit']['#attributes']['class'][] = 'btn btn-outline-success';
   }
 }
