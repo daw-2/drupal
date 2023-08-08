@@ -1,5 +1,5 @@
 fiofio.say:
-  path: /fiofio/say
+  path: /fiofio/say/{count}
   defaults:
     _controller: '\Drupal\fiofio\Controller\SayController::index'
   requirements:
