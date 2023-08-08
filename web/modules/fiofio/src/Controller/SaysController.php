@@ -22,6 +22,8 @@ class SaysController extends ControllerBase
 
     public function index(int $count): Response
     {
+        $user = $this->currentUser();
+
         return new Response($this->generator->get($count));
     }
 }
