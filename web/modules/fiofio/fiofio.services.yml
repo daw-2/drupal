@@ -1,7 +1,12 @@
+parameters:
+  fiofio.logging: false
+
 services:
   fiofio.generator:
     class: Drupal\fiofio\FioGenerator
     autowire: true
+    arguments:
+      $logging: '%fiofio.logging%'
   Drupal\fiofio\FioGenerator: '@fiofio.generator'
   fiofio.controller:
     class: Drupal\fiofio\Controller\SaysController

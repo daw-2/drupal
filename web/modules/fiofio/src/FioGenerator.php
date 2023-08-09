@@ -6,13 +6,18 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 class FioGenerator
 {
-    public function __construct(private LoggerChannelFactoryInterface $logger)
-    {
+    public function __construct(
+        private LoggerChannelFactoryInterface $logger,
+        private bool $logging
+    ) {
     }
 
     public function get(int $count): string
     {
-        $this->logger->get('default')->debug('test');
+        dump($this->logging);
+        if ($this->logging) {
+            $this->logger->get('default')->debug('test');
+        }
 
         return 'Salut, je suis '.str_repeat('fio', max($count, 2));
     }
