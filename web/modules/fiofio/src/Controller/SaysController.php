@@ -20,10 +20,14 @@ class SaysController extends ControllerBase
         );
     }
 
-    public function index(int $count): Response
+    public function index(int $count): array
     {
         $user = $this->currentUser();
 
-        return new Response($this->generator->get($count));
+        // return new Response($this->generator->get($count));
+
+        return [
+            '#title' => $this->generator->get($count),
+        ];
     }
 }

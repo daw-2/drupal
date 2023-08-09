@@ -14,11 +14,10 @@ class FioGenerator
 
     public function get(int $count): string
     {
-        dump($this->logging);
         if ($this->logging) {
             $this->logger->get('default')->debug('test');
         }
 
-        return 'Salut, je suis '.str_repeat('fio', max($count, 2));
+        return 'Salut, je suis '.str_repeat(\Drupal::config('fiofio.config')->get('message') ?? 'fio', max($count, 2));
     }
 }

@@ -1,0 +1,6 @@
+fiofio.config:
+  title: 'Réglages Fiofio'
+  route_name: fiofio.config
+  description: 'Modifier les réglages de Fiofio'
+  parent: system.admin_config_system
+  weight: 99
