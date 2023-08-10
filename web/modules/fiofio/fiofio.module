@@ -1,0 +1,11 @@
+<?php
+
+function fiofio_cron() {
+  \Drupal::messenger()->addMessage('Je suis un hook');
+}
+
+function fiofio_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id === 'node_article_form') {
+    $form['actions']['submit']['#value'] = t('Go');
+  }
+}
