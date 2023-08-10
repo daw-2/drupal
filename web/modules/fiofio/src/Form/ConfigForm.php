@@ -41,8 +41,6 @@ class ConfigForm extends ConfigFormBase
         if ($form_state->isValueEmpty('message')) {
             $form_state->setErrorByName('message', $this->t('Le message est obligatoire'));
         }
-
-        parent::validateForm($form, $form_state);
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state)

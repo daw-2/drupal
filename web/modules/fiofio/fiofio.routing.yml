@@ -6,6 +6,13 @@ fiofio.say:
   requirements:
     _permission: 'access content'
 
+fiofio.form:
+  path: /fiofio/form
+  defaults:
+    _form: Drupal\fiofio\Form\BasicForm
+  requirements:
+    _permission: 'access content'
+
 fiofio.config:
   path: /admin/config/fiofio/settings
   defaults:
