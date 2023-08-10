@@ -9,3 +9,15 @@ function fiofio_form_alter(&$form, $form_state, $form_id) {
     $form['actions']['submit']['#value'] = t('Go');
   }
 }
+
+function fiofio_menu_local_tasks_alter(&$data, $route_name) {
+  if (!\Drupal::routeMatch()->getParameter('node')) {
+    $data['tabs'][0]['devel.entities:node.devel_tab']['#access'] = false;
+  }
+}
+
+function fiofio_contextual_links_alter(&$links, $group) {
+  if ($group === 'block') {
+    $links['fiofio.contextual']['route_parameters']['count'] = 10;
+  }
+}

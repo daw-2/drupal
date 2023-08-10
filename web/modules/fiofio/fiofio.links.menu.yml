@@ -1,3 +1,12 @@
+fiofio.says:
+  title: 'Fiofio say 3'
+  route_name: fiofio.say
+  route_parameters:
+    count: 3
+  description: 'Fiofio dit quelque chose'
+  menu_name: main
+  weight: 99
+
 fiofio.config:
   title: 'Réglages Fiofio'
   route_name: fiofio.config

@@ -1,0 +1,4 @@
+fiofio.contextual:
+  route_name: fiofio.say
+  title: Exemple Fiofio
+  group: block
