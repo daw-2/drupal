@@ -64,7 +64,17 @@ class SaysController extends ControllerBase
                 ],
             ],
             // Un tableau...
-            [],
+            [
+                '#theme' => 'table',
+                '#header' => [
+                    ['data' => 'A'],
+                    ['data' => 'B'],
+                    ['data' => 'C'],
+                ],
+                '#rows' => [
+                    'data' => [1, 2, 3],
+                ],
+            ],
             // Un formulaire tout fait...
             \Drupal::formBuilder()->getForm(AjaxForm::class),
             // Un formulaire simple...
