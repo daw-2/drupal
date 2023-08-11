@@ -6,6 +6,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Ajax\PrependCommand;
+use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -23,7 +24,7 @@ class AjaxForm extends FormBase
             '#type' => 'textfield',
             '#title' => t('Email'),
             '#required' => true,
-            '#ajax' => [
+            '#ajaxa' => [
                 'callback' => '::ajaxCallback',
                 'event' => 'input',
                 'wrapper' => 'output',
@@ -68,11 +69,13 @@ class AjaxForm extends FormBase
                     'library' => ['core/drupal.dialog.ajax'],
                 ],
             ]))
-            ->addCommand(new InvokeCommand(null, 'ajaxCallback', [$form_state->getValue('email')]));
-
-        if ($form_state->getErrors()) {
-            $response->addCommand(new PrependCommand('#fiofio-ajax-form', ['#type' => 'status_messages']));
-        }
+            ->addCommand(new InvokeCommand(null, 'ajaxCallback', [$form_state->getValue('email')]))
+            ->addCommand(new RemoveCommand('#messages'))
+            ->addCommand(new PrependCommand('#fiofio-ajax-form', [
+                '#type' => 'container',
+                '#attributes' => ['id' => 'messages'],
+                ['#type' => 'status_messages'],
+            ]));
 
         return $response;
     }
