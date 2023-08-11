@@ -5,6 +5,7 @@ namespace Drupal\fiofio\Form;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
+use Drupal\Core\Ajax\PrependCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -43,6 +44,13 @@ class AjaxForm extends FormBase
         $form['submit'] = [
             '#type' => 'submit',
             '#value' => t('Envoyer'),
+            '#ajax' => [
+                'callback' => '::ajaxCallback',
+                'progress' => [
+                    'type' => 'throbber',
+                    'message' => $this->t('Chargement...'),
+                ],
+            ],
         ];
 
         return $form;
@@ -61,6 +69,10 @@ class AjaxForm extends FormBase
                 ],
             ]))
             ->addCommand(new InvokeCommand(null, 'ajaxCallback', [$form_state->getValue('email')]));
+
+        if ($form_state->getErrors()) {
+            $response->addCommand(new PrependCommand('#fiofio-ajax-form', ['#type' => 'status_messages']));
+        }
 
         return $response;
     }
