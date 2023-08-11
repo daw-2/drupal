@@ -4,7 +4,7 @@ fiofio.say:
     # _controller: fiofio.controller:index
     _controller: Drupal\fiofio\Controller\SaysController::index
   requirements:
-    _permission: 'access content'
+    _permission: 'view fiofio'
 
 fiofio.form:
   path: /fiofio/form

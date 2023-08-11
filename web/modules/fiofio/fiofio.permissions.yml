@@ -1,0 +1,3 @@
+view fiofio:
+  title: 'View fiofio'
+  restrict access: true

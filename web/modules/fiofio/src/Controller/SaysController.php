@@ -30,6 +30,20 @@ class SaysController extends ControllerBase
 
         // return new Response($this->generator->get($count));
 
+        $email = 'fiorella@boxydev.com';
+        $uid = $user->id();
+        $createdAt = \Drupal::time()->getRequestTime();
+        $database = \Drupal::database();
+
+        // Insérer dans la BDD avec une requête dynamique
+        $database->insert('fiofio')
+            ->fields(['email', 'uid', 'created_at'])
+            ->values([$email, $uid, date('Y-m-d', $createdAt)])
+            ->execute();
+
+        // Récupérer les résultats avec une requête statique
+        $result = $database->query('select * from fiofio')->fetchAll();
+
         return [
             '#type' => 'markup',
             '#markup' => $this->generator->get($count),
