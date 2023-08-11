@@ -7,9 +7,9 @@ fiofio.says:
   menu_name: main
   weight: 99
 
-fiofio.config:
+fiofio.settings:
   title: 'Réglages Fiofio'
-  route_name: fiofio.config
+  route_name: fiofio.settings
   description: 'Modifier les réglages de Fiofio'
   parent: system.admin_config_system
   weight: 99

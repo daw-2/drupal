@@ -9,7 +9,7 @@ class ConfigForm extends ConfigFormBase
 {
     protected function getEditableConfigNames()
     {
-        return ['fiofio.config'];
+        return ['fiofio.settings'];
     }
 
     public function getFormId()
@@ -19,7 +19,7 @@ class ConfigForm extends ConfigFormBase
 
     public function buildForm(array $form, FormStateInterface $form_state)
     {
-        $config = $this->config('fiofio.config');
+        $config = $this->config('fiofio.settings');
         // $config = \Drupal::state();
 
         $form['fiofio'] = [
@@ -29,8 +29,8 @@ class ConfigForm extends ConfigFormBase
             'message' => [
                 '#type' => 'textarea',
                 '#title' => $this->t('Message'),
-                '#default_value' => $config->get('message') ?? 'fio',
-                // '#default_value' => $config->get('fiofio.config')['message'] ?? 'fio',
+                '#default_value' => $config->get('message'),
+                // '#default_value' => $config->get('fiofio.settings')['message'],
             ],
         ];
 
@@ -48,7 +48,7 @@ class ConfigForm extends ConfigFormBase
     {
         parent::submitForm($form, $form_state);
 
-        $this->config('fiofio.config')->set('message', $form_state->getValue('message'))->save();
-        // \Drupal::state()->set('fiofio.config', array_merge(\Drupal::state()->get('fiofio.config') ?? [], ['message' => $form_state->getValue('message')]));
+        $this->config('fiofio.settings')->set('message', $form_state->getValue('message'))->save();
+        // \Drupal::state()->set('fiofio.settings', array_merge(\Drupal::state()->get('fiofio.settings') ?? [], ['message' => $form_state->getValue('message')]));
     }
 }

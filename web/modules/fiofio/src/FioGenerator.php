@@ -18,6 +18,6 @@ class FioGenerator
             $this->logger->get('default')->debug('test');
         }
 
-        return 'Salut, je suis '.str_repeat(\Drupal::config('fiofio.config')->get('message') ?? 'fio', max($count, 2));
+        return 'Salut, je suis '.str_repeat(\Drupal::config('fiofio.settings')->get('message'), max($count, 2));
     }
 }

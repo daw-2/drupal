@@ -21,7 +21,7 @@ fiofio.ajax:
   requirements:
     _permission: 'access content'
 
-fiofio.config:
+fiofio.settings:
   path: /admin/config/fiofio/settings
   defaults:
     _form: Drupal\fiofio\Form\ConfigForm
