@@ -29,7 +29,8 @@ class ConfigForm extends ConfigFormBase
             'message' => [
                 '#type' => 'textarea',
                 '#title' => $this->t('Message'),
-                '#default_value' => $config->get('fiofio.config')['message'] ?? 'fio',
+                '#default_value' => $config->get('message') ?? 'fio',
+                // '#default_value' => $config->get('fiofio.config')['message'] ?? 'fio',
             ],
         ];
 
@@ -48,6 +49,6 @@ class ConfigForm extends ConfigFormBase
         parent::submitForm($form, $form_state);
 
         $this->config('fiofio.config')->set('message', $form_state->getValue('message'))->save();
-        // \Drupal::state()->set('fiofio.config', ['message' => $form_state->getValue('message')]);
+        // \Drupal::state()->set('fiofio.config', array_merge(\Drupal::state()->get('fiofio.config') ?? [], ['message' => $form_state->getValue('message')]));
     }
 }
