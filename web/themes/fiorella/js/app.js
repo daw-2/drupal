@@ -1,3 +1,3 @@
 (($) => {
-    console.log('ok', $);
+    $.fn.ajaxCallback = (email) => alert(email);
 })(jQuery);
