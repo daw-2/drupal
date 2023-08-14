@@ -13,6 +13,8 @@ function fiorella_preprocess_html(array &$variables) {
 }
 
 function fiorella_preprocess_block(array &$variables) {
+  $variables['attributes']['data-block'] = 'fiorella';
+
   $id = $variables['attributes']['id'];
 
   if ($id === 'block-fiorella-powered') {
@@ -56,9 +58,8 @@ function fiorella_preprocess_menu(array &$variables, $hook) {
 }
 
 function fiorella_preprocess_node(array &$variables) {
-  // dump(time());
   $variables['content']['custom_thing'] = [
-    '#markup' => '<p>Un exemple simple</p>',
+    '#markup' => '<p>Ajouté dans les nodes</p>',
+    '#weight' => 99,
   ];
-  // dump($variables);
 }
