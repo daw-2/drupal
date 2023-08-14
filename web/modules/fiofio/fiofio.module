@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
+
 function fiofio_cron() {
   \Drupal::messenger()->addMessage('Je suis un hook');
 }
@@ -8,6 +10,26 @@ function fiofio_form_alter(&$form, $form_state, $form_id) {
   if ($form_id === 'node_article_form') {
     $form['actions']['submit']['#value'] = t('Go');
   }
+}
+
+function fiofio_form_node_page_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['message'] = [
+    '#type' => 'textfield',
+    '#title' => 'Un message',
+  ];
+
+  $form['#validate'][] = 'fiofio_validate_my_form';
+  $form['actions']['submit']['#submit'][] = 'fiofio_handle_my_form';
+}
+
+function fiofio_validate_my_form(&$form, FormStateInterface $form_state) {
+  if ($form_state->isValueEmpty('message')) {
+    $form_state->setErrorByName('message', 'Le message est vide');
+  }
+}
+
+function fiofio_handle_my_form(&$form, FormStateInterface $form_state) {
+  \Drupal::messenger()->addStatus('Super avec '.$form_state->getValue('message'));
 }
 
 function fiofio_menu_local_tasks_alter(&$data, $route_name) {
