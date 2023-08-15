@@ -1,0 +1,23 @@
+id: node.fiofio.body
+field_name: body
+entity_type: node
+bundle: fiofio
+label: Corps
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary
+status: true
+langcode: fr
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.fiofio
+  module:
+    - text

@@ -5,6 +5,8 @@ namespace Drupal\fiofio\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\fiofio\FioGenerator;
 use Drupal\fiofio\Form\AjaxForm;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,6 +32,34 @@ class SaysController extends ControllerBase
         // dump($user->getDisplayName());
 
         // return new Response($this->generator->get($count));
+
+        $nids = \Drupal::entityQuery('node')->accessCheck()->condition('type', 'chat')->execute();
+        $nodes = Node::loadMultiple($nids);
+        $render = [];
+
+        foreach ($nodes as $node) {
+            $node->title->value;
+            $node->body->value;
+            $node->toArray();
+            $node->field_image->entity->getFileUri();
+            foreach ($node->field_couleur->referencedEntities() as $term) {
+                $term->name->value;
+            }
+
+            $render[] = [
+                ['#markup' => $node->title->value],
+                ['#theme' => 'image', '#uri' => $node->field_image->entity->getFileUri()],
+                [
+                    '#theme' => 'item_list',
+                    '#list_type' => 'ul',
+                    '#items' => array_map(function ($term) {
+                        return $term->name->value;
+                    }, $node->field_couleur->referencedEntities()),
+                ],
+            ];
+        }
+
+        // return $render;
 
         $email = 'fiorella@boxydev.com';
         $uid = $user->id();

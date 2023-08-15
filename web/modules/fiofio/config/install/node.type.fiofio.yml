@@ -1,0 +1,11 @@
+type: fiofio
+name: Fiofio
+description: La liste des Fiofio.
+preview_mode: 1
+help: ''
+status: true
+new_revision: true
+langcode: fr
+dependencies:
+  module:
+    - node
