@@ -4,6 +4,7 @@ namespace Drupal\fiofio\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
@@ -12,27 +13,37 @@ use Drupal\Core\Session\AccountInterface;
  *   admin_label = @Translation("Fiofio Block"),
  * )
  */
-class FiofioBlock extends BlockBase
+class FiofioBlock extends BlockBase implements TrustedCallbackInterface
 {
     public function build()
     {
+        $texts = ['A', 'B', 'C'];
+
         return [
-            [
+            'cache' => [
                 '#type' => 'markup',
-                '#markup' => date('r', time()),
-                '#cache' => [
-                    'max-age' => -1,
-                    'keys' => ['permanent'],
-                ]
+                '#markup' => $texts[array_rand($texts)],
             ],
-            [
-                '#type' => 'markup',
-                '#markup' => date('r', time()),
-                '#cache' => [
-                    'max-age' => 10,
-                    'keys' => ['time'],
-                ]
-            ]
+            'text' => [
+                '#lazy_builder' => [self::class.'::renderText', []],
+                '#create_placeholder' => true,
+            ],
+        ];
+    }
+
+    public static function renderText()
+    {
+        $texts = ['A', 'B', 'C'];
+
+        return [
+            '#type' => 'markup',
+            '#markup' => $texts[array_rand($texts)],
+        ];
+    }
+
+    public static function trustedCallbacks() {
+        return [
+            'renderText',
         ];
     }
 

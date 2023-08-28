@@ -33,6 +33,17 @@ class SaysController extends ControllerBase
 
         // return new Response($this->generator->get($count));
 
+        $data = null;
+        $id = \Drupal::request()->get('id') ?? 'fio';
+        $cache = \Drupal::cache()->get($id);
+
+        if ($cache) {
+            $data = $cache->data;
+        } else {
+            // sleep(2);
+            \Drupal::cache()->set($id, time());
+        }
+
         $nids = \Drupal::entityQuery('node')->accessCheck()->condition('type', 'chat')->execute();
         $nodes = Node::loadMultiple($nids);
         $render = [];
