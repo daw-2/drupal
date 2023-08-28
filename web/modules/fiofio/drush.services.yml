@@ -1,0 +1,5 @@
+services:
+  fiofio.commands:
+    class: Drupal\fiofio\Commands\FioCommand
+    tags:
+      - { name: drush.command }
