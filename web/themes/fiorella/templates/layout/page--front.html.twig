@@ -12,16 +12,19 @@
 </nav>
 
 <div class="container">
+  {{ featured }}
+</div>
+
+<div class="container">
   {{ page.breadcrumb }}
   {{ page.highlighted }}
   {{ page.help }}
-
-  {{ fiorella }}
 
   <main>
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
     <div class="row">
+      {{ page.sidebar_second }}
       <div {% if page.sidebar_first or page.sidebar_second %} class="col-lg-9" {% endif %}>
         {{ page.content }}
       </div>
