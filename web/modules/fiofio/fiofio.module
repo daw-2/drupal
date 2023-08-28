@@ -43,3 +43,9 @@ function fiofio_contextual_links_alter(&$links, $group) {
     $links['fiofio.contextual']['route_parameters']['count'] = 10;
   }
 }
+
+function fiofio_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node' && $entity->getType() == 'fiofio') {
+    dump('Make things');
+  }
+}

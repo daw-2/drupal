@@ -7,6 +7,15 @@ fiofio.say:
     # _permission: 'view fiofio'
     _permission: 'access content'
 
+fiofio.duplicate:
+  path: /fiofio/duplicate/{node}
+  defaults:
+    # _controller: fiofio.controller:index
+    _controller: Drupal\fiofio\Controller\SaysController::duplicate
+  requirements:
+    # _permission: 'view fiofio'
+    _permission: 'access content'
+
 fiofio.form:
   path: /fiofio/form
   defaults:

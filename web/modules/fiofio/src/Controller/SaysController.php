@@ -156,4 +156,13 @@ class SaysController extends ControllerBase
             '#title' => 'Fiofio',
         ];
     }
+
+    public function duplicate(int $node)
+    {
+        $node = Node::load($node);
+        $clone = $node->createDuplicate();
+        $clone->save();
+
+        return $this->redirect('entity.node.canonical', ['node' => $clone->id()]);
+    }
 }

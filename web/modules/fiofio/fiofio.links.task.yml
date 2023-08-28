@@ -1,8 +1,6 @@
 fiofio.task:
-  title: 'Fiofio say 3'
-  route_name: fiofio.say
-  route_parameters:
-    count: 3
+  title: 'Fiofio duplicate'
+  route_name: fiofio.duplicate
   base_route: entity.node.canonical
   description: 'Fiofio dit quelque chose'
   weight: 99

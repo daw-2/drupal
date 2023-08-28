@@ -19,8 +19,12 @@ class FioCommand extends DrushCommands
         $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'fiofio']);
 
         foreach ($nodes as $node) {
-            $node->delete();
+            $node->title = 'test';
+            $node->save();
+            // $node->delete();
         }
+
+        return;
 
         for ($i = 0; $i <= 10; $i++) {
             Node::create([
