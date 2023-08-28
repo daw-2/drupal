@@ -28,10 +28,29 @@ function fiorella_preprocess_block(array &$variables) {
   }
 }
 
+function fiorella_theme($existing, $type, $theme, $path) {
+  return [
+    'fiorella' => [
+      'template' => 'fiorella', // fiorella.html.twig
+      'variables' => [
+        'firstname' => '',
+        'lastname' => '',
+        'hobbies' => ['Read', 'Play', 'Swim'],
+      ],
+    ],
+  ];
+}
+
 function fiorella_preprocess_page(array &$variables) {
   if ($variables['is_front']) {
     $variables['#attached']['library'][] = 'fiorella/global';
   }
+
+  $variables['fiorella'] = [
+    '#theme' => 'fiorella',
+    '#firstname' => 'Fiorella',
+    '#lastname' => 'Mota',
+  ];
 }
 
 function fiorella_preprocess_form(array &$variables) {
@@ -62,4 +81,8 @@ function fiorella_preprocess_node(array &$variables) {
     '#markup' => '<p>Ajouté dans les nodes</p>',
     '#weight' => 99,
   ];
+}
+
+function fiorella_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'views_view_unformatted__' . $variables['view']->id();
 }
