@@ -51,6 +51,10 @@ function fiorella_preprocess_page(array &$variables) {
     '#firstname' => 'Fiorella',
     '#lastname' => 'Mota',
   ];
+
+  $variables['setting1'] = theme_get_setting('setting1');
+
+  $variables['#attached']['drupalSettings']['maVariable'] = theme_get_setting('setting1');
 }
 
 function fiorella_preprocess_form(array &$variables) {
@@ -98,4 +102,18 @@ function fiorella_preprocess_page__front(array &$variables) {
     '#display_id' => 'block_1',
     '#theme' => 'cool__non',
   ];
+}
+
+function fiorella_preprocess_field(&$variables, $hook) {
+  if ($variables['entity_type'] === 'node' && $variables['field_name'] === 'body') {
+    foreach ($variables['items'] as &$item) {
+      $originalText = $item['content']['#text'];
+
+      if (mb_strlen($originalText) > 150) {
+        $newText = substr($originalText, 0, 150).'...';
+        $item['truncate'] = $item['content'];
+        $item['truncate']['#text'] = $newText;
+      }
+    }
+  }
 }
