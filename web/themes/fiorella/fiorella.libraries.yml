@@ -5,9 +5,8 @@ global:
   js:
     js/app.js: {}
   dependencies:
-    - core/jquery
-    - core/drupal
-    - core/once
+    - fiorella/fonts.nunito
+    - fiorella/bootstrap
 
 bootstrap:
   version: 5.3.3
@@ -19,7 +18,7 @@ bootstrap:
   dependencies:
     - core/jquery
 
-fonts:
+fonts.nunito:
   css:
     theme:
       //fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Nunito:wght@300;400;700&display=swap: {}

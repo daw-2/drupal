@@ -1,3 +1,5 @@
+{{ attach_library('fiorella/global') }}
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     {{ page.header }}
@@ -53,3 +55,20 @@
   </div>
 </footer>
 {% endif %}
+
+{# Un commentaire #}
+{% set name = '<script>Drupal2222</script>' %}
+
+{{ name | raw | e | upper }}
+
+{{ dump() }}
+
+{% if logged_in %}
+  {{ dump(user.account.roles.1) }}
+{% endif %}
+
+<h1>{{ firstname }}</h1>
+
+{% for i in 1..100 %}
+  {{ i }}
+{% endfor %}

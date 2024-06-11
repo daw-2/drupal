@@ -3,8 +3,10 @@
 /web/core
 /web/modules/contrib
 /web/modules/README.txt
+/web/profiles/contrib
 /web/profiles/README.txt
 /web/sites
+/web/themes/contrib
 /web/themes/README.txt
 /web/.csslintrc
 /web/.eslintignore

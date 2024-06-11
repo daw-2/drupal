@@ -1,5 +1,36 @@
 <?php
 
+use Drupal\block\Entity\Block;
+use Drupal\Core\Datetime\DrupalDateTime;
+
+function fiorella_preprocess_region__header(array &$variables) {
+  $variables['prenom'] = 'Matthieu';
+
+  $birthday = new DrupalDateTime('1991-11-18');
+  $variables['birthday'] = $birthday;
+  $variables['age'] = $birthday->diff(new DrupalDateTime());
+
+  $variables['contacts'] = ['a', 'b', 'c'];
+  $variables['cars'] = [
+    ['name' => 'A'],
+    ['name' => 'B'],
+    ['name' => 'C'],
+  ];
+
+  $variables['test'] = [
+    '#theme' => 'image',
+    '#uri' => 'https://i.pravatar.cc/150?u=fiorella@boxydev.com',
+  ];
+
+  $variables['checkbox'] = [
+    '#type' => 'checkbox',
+    '#title' => 'Exemple',
+    '#id' => 'check',
+  ];
+
+  $variables['show'] = theme_get_setting('setting2');
+}
+
 function fiorella_page_attachments_alter(array &$attachments) {
   foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
     if ($attachment[1] == 'system_meta_generator') {
@@ -10,6 +41,7 @@ function fiorella_page_attachments_alter(array &$attachments) {
 
 function fiorella_preprocess_html(array &$variables) {
   $variables['attributes']['class'][] = 'fiorella';
+  $variables['attributes']['id'] = uniqid();
 }
 
 function fiorella_preprocess_block(array &$variables) {
@@ -26,12 +58,30 @@ function fiorella_preprocess_block(array &$variables) {
   if ($id === 'block-fiorella-views-block-who-s-online-who-s-online-block') {
     $variables['attributes']['class'][] = 'col';
   }
+
+  // On charge tous les blocs (à optimiser) pour trouver les blocs de la région footer et modifier
+    // leur classe
+    $block = Block::load($variables['elements']['#id']);
+
+    if ($block->getRegion() === 'footer') {
+        $variables['attributes']['class'][] = 'col-lg-4 col-md-6';
+    }
+}
+
+function fiorella_preprocess_block__fiorella_powered(array &$variables) {
+  $siteName = \Drupal::config('system.site')->get('name');
+
+  $variables['content'] = [
+    '#markup' => '<p class="mb-0">Copyright '.date('Y').' &copy; '.$siteName.'.</p>'
+  ];
+  $variables['site_name'] = $siteName;
 }
 
 function fiorella_theme($existing, $type, $theme, $path) {
+  // On peut créer son propre "template" render array réutilisable
   return [
     'fiorella' => [
-      'template' => 'fiorella', // fiorella.html.twig
+      'template' => 'renders/fiorella', // fiorella.html.twig
       'variables' => [
         'firstname' => '',
         'lastname' => '',
@@ -42,14 +92,25 @@ function fiorella_theme($existing, $type, $theme, $path) {
 }
 
 function fiorella_preprocess_page(array &$variables) {
+  // On peut faire appel à des services pour avoir des données du site
+  $uri = \Drupal::request()->getRequestUri();
+
   if ($variables['is_front']) {
     $variables['#attached']['library'][] = 'fiorella/global';
   }
+
+  // Je charge la librairie seulement sur la page /articles
+  if (str_contains($uri, '/articles')) {
+    $variables['#attached']['library'][] = 'fiorella/global';
+  }
+
+  $variables['firstname'] = 'Fiorella';
 
   $variables['fiorella'] = [
     '#theme' => 'fiorella',
     '#firstname' => 'Fiorella',
     '#lastname' => 'Mota',
+    '#hobbies' => [1, 2, 3],
   ];
 
   $variables['setting1'] = theme_get_setting('setting1');
@@ -65,7 +126,7 @@ function fiorella_preprocess_form(array &$variables) {
   }
 }
 
-function fiorella_form_alter(&$form, $form_state, $form_id) {
+function fiorella_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id === 'search_block_form') {
     $form['actions']['submit']['#attributes']['class'][] = 'btn btn-outline-success';
   }
@@ -85,6 +146,12 @@ function fiorella_preprocess_node(array &$variables) {
     '#markup' => '<p>Ajouté dans les nodes</p>',
     '#weight' => 99,
   ];
+
+  $variables['content']['present'] = [
+    '#theme' => 'fiorella',
+    '#firstname' => 'Fiorella',
+    '#hobbies' => [1, 2, 3],
+  ];
 }
 
 function fiorella_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
@@ -100,7 +167,6 @@ function fiorella_preprocess_page__front(array &$variables) {
     '#type' => 'view',
     '#name' => 'slider',
     '#display_id' => 'block_1',
-    '#theme' => 'cool__non',
   ];
 }
 

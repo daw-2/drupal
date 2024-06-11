@@ -4,9 +4,9 @@ description: 'Un thème Drupal.'
 core_version_requirement: '>=10'
 base theme: false
 libraries:
-  - fiorella/fonts
-  - fiorella/bootstrap
   - fiorella/global
+#libraries-override:
+#  core/jquery: false
 #regions:
 #  header: 'Header'
 #  content: 'Content'
